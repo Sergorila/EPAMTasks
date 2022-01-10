@@ -4,19 +4,24 @@ namespace XMasTree
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            Show();
+        }
+
         public static int Input()
         {
             Console.Write("Enter N: ");
-            int N = int.Parse(Console.ReadLine());
-
-            if (N > 0)
+            int N;
+            if (int.TryParse(Console.ReadLine(), out N))
             {
-                return N;
+                if (N > 0)
+                {
+                    return N;
+                }
             }
-            else
-            {
-                throw new Exception("Incorrect input");
-            }
+            Console.WriteLine("Incorrect input");
+            return 0;
         }
 
         public static void Show()
@@ -31,10 +36,6 @@ namespace XMasTree
                     Console.WriteLine(line.PadLeft(N - 1) + "*" + line);
                 }
             }
-        }
-        static void Main(string[] args)
-        {
-            Show();
         }
     }
 }

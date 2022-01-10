@@ -8,9 +8,19 @@ namespace Rectangle
         {
             Console.WriteLine("Enter the sides of the rectangle");
             Console.Write("a = ");
-            int a = int.Parse(Console.ReadLine());
+            int a, b;
+            if (!int.TryParse(Console.ReadLine(),out a))
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+            
             Console.Write("b = ");
-            int b = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out b))
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
 
             if (a > 0 && b > 0)
             {
@@ -18,7 +28,7 @@ namespace Rectangle
             }
             else
             {
-                throw new Exception("Incorrect input");
+                Console.WriteLine("Incorrect input");
             }
         }
     }

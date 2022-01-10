@@ -8,26 +8,34 @@ namespace Font_Adjustment
 {
     class FontParams
     {
-        public List<string> parameters;
+        public Dictionary<string, bool> parameters;
 
         public FontParams()
         {
-            parameters = new List<string>();
+            parameters = new Dictionary<string, bool>();
+            parameters["Bold"] = false;
+            parameters["Italic"] = false;
+            parameters["Underline"] = false;
         }
         public void Show()
         {
             Console.Write("Параметры надписи: ");
-            if (parameters.Count == 0)
+            int count = 0;
+            foreach (var item in parameters.Keys)
+            {
+                if (parameters[item])
+                {
+                    Console.Write($"{item} ");
+                    count++;
+                }       
+            }
+            if (count == 0)
             {
                 Console.WriteLine("None");
             }
             else
             {
-                for (int i = 0; i < parameters.Count - 1; i++)
-                {
-                    Console.Write($"{parameters[i]}, ");
-                }
-                Console.WriteLine($"{parameters[parameters.Count - 1]}");
+                Console.WriteLine();
             }
 
             Console.WriteLine("Введите: ");
@@ -43,40 +51,39 @@ namespace Font_Adjustment
             switch (n)
             {
                 case 1:
-                    if (parameters.Contains("Bold"))
+                    if (parameters["Bold"])
                     {
-                        parameters.Remove("Bold");
+                        parameters["Bold"] = false;
                     }
                     else
                     {
-                        parameters.Add("Bold");
+                        parameters["Bold"] = true;
                     };
                     break;
                 case 2:
-                    if (parameters.Contains("Italic"))
+                    if (parameters["Italic"])
                     {
-                        parameters.Remove("Italic");
+                        parameters["Italic"] = false;
                     }
                     else
                     {
-                        parameters.Add("Italic");
+                        parameters["Italic"] = true;
                     };
                     break;
                 case 3:
-                    if (parameters.Contains("Underline"))
+                    if (parameters["Underline"])
                     {
-                        parameters.Remove("Underline");
+                        parameters["Underline"] = false;
                     }
                     else
                     {
-                        parameters.Add("Underline");
+                        parameters["Underline"] = true;
                     };
                     break;
                 default:
                     Console.WriteLine("Incorrect input");
                     break;
             }
-            parameters.Sort();
             Show();
         }
     }
